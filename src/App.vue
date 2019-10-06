@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <Home />
   </div>
 </template>
+
+<script>
+import Home from "@/views/Home.vue";
+export default {
+  components: { Home }
+};
+</script>
 
 <style>
 #app {
@@ -16,16 +19,23 @@
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
+
+table,
+tr,
+td {
+  border: silver 1px dotted;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+table {
+  border-collapse: collapse;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+tr {
+  height: 20px;
+}
+
+td {
+  min-width: 20px;
+  box-sizing: border-box;
 }
 </style>
