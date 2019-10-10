@@ -13,12 +13,12 @@
 1. 그림 그리기 기능
 
    - [x] 페이지 중앙에 32x32 grid 화면이 표시된다.
-   - [ ] grid 화면중 한 곳을 클릭하면 1x1 pixel로 색칠된다.
-   - [ ] grid 화면 아래에는 Color palette(16색)이 있다.
-   - [ ] Color palette 옆에는 Erase(색칠된 pixel을 지우는 기능)이 있다.
+   - [x] grid 화면중 한 곳을 클릭하면 1x1 pixel로 색칠된다.
+   - [x] grid 화면 아래에는 Color palette(16색)이 있다.
+   - [x] Color palette 옆에는 Erase(색칠된 pixel을 지우는 기능)이 있다.
 
-2. 채팅 기능
-
+2. 채팅 기능 (진행중)
+  
    - [ ] grid 화면 우측에는 대화 화면이 있다. (접속자 수, 메세지 입력, 메세지 목록)
    - [ ] 여러 사용자가 동시에 메세지를 주고 받을 수 있다.
 
