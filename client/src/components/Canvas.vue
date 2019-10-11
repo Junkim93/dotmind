@@ -3,9 +3,9 @@
     <h1>{{ msg }}</h1>
     <table
       class="pixel-canvas"
-      @mousedown="isTrueDrawing"
-      @mouseleave="isFalseDrawing"
-      @mouseup="isFalseDrawing"
+      ref="pixel"
+      @mousedown="isDrawing"
+      @mouseup="isntDrawing"
       @mouseover="paintPixel"
     ></table>
 
@@ -31,14 +31,14 @@ export default {
     return {
       pixelWidth: 32,
       pixelHeight: 32,
-      isDrawing: false,
+      drawing: false,
       currentColor: 'black',
       socket: io('http://localhost:4000/')
     };
   },
   methods: {
     makeGrid() {
-      const pixelCanvas = document.querySelector('.pixel-canvas');
+      const pixelCanvas = this.$refs.pixel;
       for (let i = 0; i < this.pixelHeight; i += 1) {
         const gridRow = document.createElement('tr');
         pixelCanvas.appendChild(gridRow);
@@ -49,28 +49,24 @@ export default {
         }
       }
     },
-    isTrueDrawing(e) {
-      this.isDrawing = true;
+    isDrawing(e) {
+      this.drawing = true;
       this.paintPixel(e);
     },
-    isFalseDrawing() {
-      this.isDrawing = false;
+    isntDrawing() {
+      this.drawing = false;
     },
     paintPixel(e) {
-      if (this.isDrawing && e.target.tagName === 'TD')
+      if (this.drawing && e.target.tagName === 'TD')
         e.target.style.backgroundColor = this.currentColor;
     },
-    eraseAllPalette(e) {
-      const pixelCanvas = document.querySelector('.pixel-canvas');
+    eraseAllPalette() {
+      const pixelCanvas = this.$refs.pixel;
       pixelCanvas.querySelectorAll('td').forEach(td => (td.style.backgroundColor = 'white'));
     }
   },
   mounted() {
     this.makeGrid();
-
-    this.socket.on('news', data => {
-      this.socket.emit('my other event', { my: 'data' });
-    });
   }
 };
 </script>

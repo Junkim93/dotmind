@@ -29,8 +29,7 @@ app.get('/', (req, res) => {
 
 // socket 로직
 io.on('connection', (socket) => {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', (data) => {
-    console.log(data);
-  });
+  socket.on('newMessage', data => {
+    socket.broadcast.emit('message', data);
+  })
 });
