@@ -6,12 +6,12 @@
       ref="pixel"
       @mousedown="isDrawing"
       @mouseup="isntDrawing"
-      @mouseover="paintPixel"
+      @mouseover.prevent="paintPixelSocket"
     ></table>
 
     <div class="palette">
       <swatches v-model="currentColor" inline />
-      <button class="palette-eraser" @click.prevent="eraseAllPalette">CLEAR</button>
+      <button class="palette-eraser" @click.prevent="eraseCanvasSocket">CLEAR</button>
     </div>
   </div>
 </template>
@@ -29,8 +29,8 @@ export default {
   components: { Swatches },
   data() {
     return {
-      pixelWidth: 32,
-      pixelHeight: 32,
+      pixelWidth: 16,
+      pixelHeight: 16,
       drawing: false,
       currentColor: 'black',
       socket: io('http://localhost:4000/')
@@ -38,35 +38,53 @@ export default {
   },
   methods: {
     makeGrid() {
-      const pixelCanvas = this.$refs.pixel;
       for (let i = 0; i < this.pixelHeight; i += 1) {
         const gridRow = document.createElement('tr');
-        pixelCanvas.appendChild(gridRow);
+        this.$refs.pixel.appendChild(gridRow);
 
         for (let j = 0; j < this.pixelWidth; j += 1) {
           const gridCell = document.createElement('td');
+          gridCell.key = String(i) + String(j);
           gridRow.appendChild(gridCell);
         }
       }
     },
     isDrawing(e) {
       this.drawing = true;
-      this.paintPixel(e);
+      this.paintPixelSocket(e);
     },
     isntDrawing() {
       this.drawing = false;
     },
-    paintPixel(e) {
-      if (this.drawing && e.target.tagName === 'TD')
+    paintPixelSocket(e) {
+      if (this.drawing && e.target.tagName === 'TD') {
         e.target.style.backgroundColor = this.currentColor;
+        const pixelData = { key: e.target.key, color: this.currentColor };
+        this.socket.emit('newPixelData', pixelData);
+      }
     },
-    eraseAllPalette() {
-      const pixelCanvas = this.$refs.pixel;
-      pixelCanvas.querySelectorAll('td').forEach(td => (td.style.backgroundColor = 'white'));
+    eraseCanvas() {
+      this.$refs.pixel.querySelectorAll('td').forEach(td => (td.style.backgroundColor = 'white'));
+    },
+    eraseCanvasSocket() {
+      this.eraseCanvas();
+      this.socket.emit('eraseCanvasSign');
     }
   },
   mounted() {
     this.makeGrid();
+
+    this.socket.on('paintPixel', data => {
+      this.$refs.pixel.querySelectorAll('td').forEach(td => {
+        if (td.key === data.key) {
+          td.style.backgroundColor = data.color;
+        }
+      });
+    });
+
+    this.socket.on('eraseCanvas', () => {
+      this.eraseCanvas();
+    });
   }
 };
 </script>

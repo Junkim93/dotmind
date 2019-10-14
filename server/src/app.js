@@ -24,12 +24,20 @@ function handleListening() {
 server.listen(PORT, handleListening);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '../../client/public/index.html')
-})
+  res.sendFile(__dirname + '../../client/public/index.html');
+});
 
 // socket 로직
-io.on('connection', (socket) => {
+io.on('connection', socket => {
   socket.on('newMessage', data => {
     socket.broadcast.emit('message', data);
-  })
+  });
+
+  socket.on('newPixelData', data => {
+    socket.broadcast.emit('paintPixel', data);
+  });
+
+  socket.on('eraseCanvasSign', () => {
+    socket.broadcast.emit('eraseCanvas');
+  });
 });
