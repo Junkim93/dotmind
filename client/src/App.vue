@@ -12,14 +12,16 @@ export default {
 </script>
 
 <style>
+@import './assets/styles/reset.scss';
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Press Start 2P', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  padding: 30px;
 }
 
+/* pixel 화면 스타일 */
 table,
 tr,
 td {
