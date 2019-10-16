@@ -11,7 +11,7 @@
 
     <div class="palette">
       <swatches v-model="currentColor" inline />
-      <button class="palette-eraser" @click.prevent="eraseCanvasSocket">CLEAR</button>
+      <button class="nes-btn" @click.prevent="eraseCanvasSocket">CLEAR</button>
     </div>
   </div>
 </template>
