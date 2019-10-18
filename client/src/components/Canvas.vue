@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import Swatches from 'vue-swatches';
-import 'vue-swatches/dist/vue-swatches.min.css';
-import io from 'socket.io-client';
+import Swatches from "vue-swatches";
+import "vue-swatches/dist/vue-swatches.min.css";
+import io from "socket.io-client";
 
 export default {
-  name: 'Canvas',
+  name: "Canvas",
   props: {
     msg: String
   },
@@ -32,18 +32,18 @@ export default {
       pixelWidth: 16,
       pixelHeight: 16,
       drawing: false,
-      currentColor: 'black',
-      socket: io('http://localhost:4000/')
+      currentColor: "black",
+      socket: io("http://localhost:3000/")
     };
   },
   methods: {
     makeGrid() {
       for (let i = 0; i < this.pixelHeight; i += 1) {
-        const gridRow = document.createElement('tr');
+        const gridRow = document.createElement("tr");
         this.$refs.pixel.appendChild(gridRow);
 
         for (let j = 0; j < this.pixelWidth; j += 1) {
-          const gridCell = document.createElement('td');
+          const gridCell = document.createElement("td");
           gridCell.key = String(i) + String(j);
           gridRow.appendChild(gridCell);
         }
@@ -57,32 +57,34 @@ export default {
       this.drawing = false;
     },
     paintPixelSocket(e) {
-      if (this.drawing && e.target.tagName === 'TD') {
+      if (this.drawing && e.target.tagName === "TD") {
         e.target.style.backgroundColor = this.currentColor;
         const pixelData = { key: e.target.key, color: this.currentColor };
-        this.socket.emit('newPixelData', pixelData);
+        this.socket.emit("newPixelData", pixelData);
       }
     },
     eraseCanvas() {
-      this.$refs.pixel.querySelectorAll('td').forEach(td => (td.style.backgroundColor = 'white'));
+      this.$refs.pixel
+        .querySelectorAll("td")
+        .forEach(td => (td.style.backgroundColor = "white"));
     },
     eraseCanvasSocket() {
       this.eraseCanvas();
-      this.socket.emit('eraseCanvasSign');
+      this.socket.emit("eraseCanvasSign");
     }
   },
   mounted() {
     this.makeGrid();
 
-    this.socket.on('paintPixel', data => {
-      this.$refs.pixel.querySelectorAll('td').forEach(td => {
+    this.socket.on("paintPixel", data => {
+      this.$refs.pixel.querySelectorAll("td").forEach(td => {
         if (td.key === data.key) {
           td.style.backgroundColor = data.color;
         }
       });
     });
 
-    this.socket.on('eraseCanvas', () => {
+    this.socket.on("eraseCanvas", () => {
       this.eraseCanvas();
     });
   }

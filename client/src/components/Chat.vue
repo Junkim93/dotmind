@@ -4,7 +4,7 @@
       <section class="message -left">
         <i class="nes-ash"></i>
         <ul class="nes-balloon from-left" v-for="(data, index) in othersMsg" :key="index">
-          <li>{{ data.msg }}</li>
+          <li>{{ `others: ${data.msg}` }}</li>
         </ul>
       </section>
       <section class="message -right">
@@ -28,14 +28,15 @@
 </template>
 
 <script>
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
 export default {
+  name: "Chat",
   data() {
     return {
-      socket: io('http://localhost:4000/'),
+      socket: io("http://localhost:4000/"),
       messages: [],
-      message: ''
+      message: ""
     };
   },
 
@@ -57,13 +58,13 @@ export default {
   methods: {
     sendMessage() {
       this.messages.push({ msg: this.message, id: 1 });
-      this.socket.emit('newMessage', { msg: this.message, id: 2 });
-      this.message = '';
+      this.socket.emit("newMessage", { msg: this.message, id: 2 });
+      this.message = "";
     }
   },
 
   mounted() {
-    this.socket.on('message', data => {
+    this.socket.on("message", data => {
       this.messages.push(data);
     });
   }

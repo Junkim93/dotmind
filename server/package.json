@@ -1,28 +1,26 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "create",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node src/app.js --delay 2"
+    "start": "nodemon --exec babel-node ./bin/www --delay 2"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "core-js": "^3.2.1",
+    "cookie-parser": "~1.4.4",
+    "core-js": "^3.3.2",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "morgan": "^1.9.1",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.3",
-    "@babel/core": "^7.6.3",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
     "@babel/preset-env": "^7.6.3",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.4"
   }
 }
