@@ -29,12 +29,13 @@
 
 <script>
 import io from 'socket.io-client';
+const port = 'https://aqueous-peak-71251.herokuapp.com/' || 3000;
 
 export default {
   name: 'Chat',
   data() {
     return {
-      socket: io('http://localhost:3000/'),
+      socket: io(`http://localhost:${port}/`),
       messages: [],
       message: ''
     };
