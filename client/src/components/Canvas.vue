@@ -20,7 +20,7 @@
 import Swatches from 'vue-swatches';
 import 'vue-swatches/dist/vue-swatches.min.css';
 import io from 'socket.io-client';
-const port = 'https://aqueous-peak-71251.herokuapp.com/' || 3000;
+const URI = 'https://aqueous-peak-71251.herokuapp.com/';
 
 export default {
   name: 'Canvas',
@@ -34,7 +34,7 @@ export default {
       pixelHeight: 16,
       drawing: false,
       currentColor: 'black',
-      socket: io(`http://localhost:${port}/`)
+      socket: io(URI)
     };
   },
   methods: {
