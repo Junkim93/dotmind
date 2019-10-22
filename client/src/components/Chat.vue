@@ -29,13 +29,13 @@
 
 <script>
 import io from 'socket.io-client';
-const URI = 'https://aqueous-peak-71251.herokuapp.com/';
+// const URI = 'https://aqueous-peak-71251.herokuapp.com/';
 
 export default {
   name: 'Chat',
   data() {
     return {
-      socket: io(URI),
+      socket: io(`http://localhost:3000/`),
       messages: [],
       message: ''
     };
