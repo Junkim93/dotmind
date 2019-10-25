@@ -35,12 +35,12 @@
 
 <script>
 import io from 'socket.io-client';
-// const URI = 'https://aqueous-peak-71251.herokuapp.com/';
+const URI = 'https://aqueous-peak-71251.herokuapp.com/';
 
 export default {
   data() {
     return {
-      socket: io(`http://localhost:3000/`),
+      socket: io(URI),
       messages: [],
       message: ''
     };
