@@ -1,6 +1,5 @@
 <template>
   <div class="canvas">
-    <h1>{{ msg }}</h1>
     <table
       class="pixel-canvas"
       ref="pixel"
@@ -10,7 +9,7 @@
     ></table>
 
     <div class="palette">
-      <swatches v-model="currentColor" inline />
+      <swatches v-model="currentColor" colors="text-basic" inline />
       <button class="nes-btn" @click.prevent="eraseCanvasSocket">CLEAR</button>
     </div>
   </div>
@@ -23,10 +22,6 @@ import io from 'socket.io-client';
 // const URI = 'https://aqueous-peak-71251.herokuapp.com/';
 
 export default {
-  name: 'Canvas',
-  props: {
-    msg: String
-  },
   components: { Swatches },
   data() {
     return {

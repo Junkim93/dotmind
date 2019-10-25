@@ -1,24 +1,30 @@
 <template>
   <div class="chat">
     <section class="message-list">
-      <section class="message -left">
-        <i class="nes-ash"></i>
-        <ul class="nes-balloon from-left" v-for="(data, index) in othersMsg" :key="index">
-          <li>{{ `others: ${data.msg}` }}</li>
+      <section class="message -left test-left">
+        <ul
+          class="nes-balloon from-left from-column"
+          v-for="(data, index) in othersMsg"
+          :key="index"
+        >
+          <li class="msg-style">{{ `others: ${data.msg}` }}</li>
         </ul>
       </section>
-      <section class="message -right">
-        <ul class="nes-balloon from-right" v-for="(data, index) in ownMsg" :key="index">
-          <li>{{ data.msg }}</li>
+      <section class="message -right test-right">
+        <ul
+          class="nes-balloon from-right test-right from-column"
+          v-for="(data, index) in ownMsg"
+          :key="index"
+        >
+          <li class="msg-style">{{ data.msg }}</li>
         </ul>
-        <i class="nes-ash"></i>
       </section>
     </section>
-    <div class="nes-field">
+    <div class="nes-field message-input">
       <label for="message-field"></label>
       <input
         type="text"
-        @keyup.enter="sendMessage"
+        @keypress.enter="sendMsg"
         v-model="message"
         id="message-field"
         class="nes-input"
@@ -32,7 +38,6 @@ import io from 'socket.io-client';
 // const URI = 'https://aqueous-peak-71251.herokuapp.com/';
 
 export default {
-  name: 'Chat',
   data() {
     return {
       socket: io(`http://localhost:3000/`),
@@ -57,10 +62,17 @@ export default {
   },
 
   methods: {
-    sendMessage() {
+    /* Methods for Message function */
+    sendMsg() {
       this.messages.push({ msg: this.message, id: 1 });
       this.socket.emit('newMessage', { msg: this.message, id: 2 });
       this.message = '';
+      this.moveScrolltoEnd();
+    },
+
+    moveScrolltoEnd() {
+      const messageWrapper = this.$el.querySelector('.message-list');
+      messageWrapper.scrollTop = messageWrapper.scrollHeight;
     }
   },
 
@@ -68,16 +80,47 @@ export default {
     this.socket.on('message', data => {
       this.messages.push(data);
     });
+  },
+
+  updated() {
+    this.moveScrolltoEnd();
   }
 };
 </script>
 
-<style scoped>
-li {
-  list-style: none;
+<style lang="scss" scoped>
+.chat {
+  width: 400px;
+  flex: none;
+  border: 1px solid black;
 }
 
-.nes-field {
-  width: 300px;
+.message-list {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.message-input {
+  width: 100%;
+}
+
+.test-left {
+  margin-right: auto;
+  text-align: left;
+  width: 80%;
+}
+
+.test-right {
+  margin-left: auto;
+  text-align: right;
+  max-width: 80%;
+}
+
+.from-column {
+  display: flex;
+  flex-direction: column;
 }
 </style>
