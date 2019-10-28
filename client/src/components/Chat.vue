@@ -35,7 +35,7 @@
 
 <script>
 import io from 'socket.io-client';
-const URI = 'https://aqueous-peak-71251.herokuapp.com/';
+const URI = 'https://thawing-chamber-58948.herokuapp.com/';
 
 export default {
   data() {

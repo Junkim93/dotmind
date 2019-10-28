@@ -19,14 +19,14 @@
 import Swatches from 'vue-swatches';
 import 'vue-swatches/dist/vue-swatches.min.css';
 import io from 'socket.io-client';
-const URI = 'https://aqueous-peak-71251.herokuapp.com/';
+const URI = 'https://thawing-chamber-58948.herokuapp.com/';
 
 export default {
   components: { Swatches },
   data() {
     return {
-      pixelWidth: 16,
-      pixelHeight: 16,
+      pixelWidth: 32,
+      pixelHeight: 32,
       drawing: false,
       currentColor: 'black',
       socket: io(URI)

@@ -35,7 +35,7 @@ export default {
 
 .contents-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex: 1;
 }
 </style>
