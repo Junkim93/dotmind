@@ -2,6 +2,7 @@
   <div class="home-container">
     <header>
       <Nav />
+      <Game />
     </header>
     <div class="contents-container">
       <Canvas class="canvas-container" />
@@ -15,13 +16,15 @@
 import Nav from '@/components/Nav.vue';
 import Canvas from '@/components/Canvas.vue';
 import Chat from '@/components/Chat.vue';
+import Game from '@/components/Game.vue';
 
 export default {
   name: 'home',
   components: {
     Nav,
     Canvas,
-    Chat
+    Chat,
+    Game
   }
 };
 </script>
