@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "cd client && npm run build",
+    "prebuild": "rm -rf ./server/public",
+    "build": "cd client && npm run build",
     "start": "cd server && npm start"
   }
 }
