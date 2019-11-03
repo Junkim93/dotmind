@@ -19,17 +19,18 @@
 import Swatches from 'vue-swatches';
 import 'vue-swatches/dist/vue-swatches.min.css';
 import io from 'socket.io-client';
-const URI = 'https://thawing-chamber-58948.herokuapp.com/';
+// const URI = 'https://thawing-chamber-58948.herokuapp.com/';
+const local = 'http://localhost:3000/';
 
 export default {
   components: { Swatches },
   data() {
     return {
-      pixelWidth: 32,
-      pixelHeight: 32,
+      pixelWidth: 24,
+      pixelHeight: 24,
       drawing: false,
       currentColor: 'black',
-      socket: io(URI)
+      socket: io(local)
     };
   },
   methods: {

@@ -5,9 +5,11 @@
  */
 
 const app = require('../app');
-const debug = require('debug')('create:server');
 const http = require('http');
+const debug = require('debug')('create:server');
 const socketIo = require('socket.io');
+
+const socketController = require('../socket');
 
 /**
  * Get port from environment and store in Express.
@@ -23,22 +25,10 @@ const handleListening = () =>
  */
 
 const server = http.createServer(app);
-const io = socketIo(server);
 
-// socket logic
-io.on('connection', socket => {
-  socket.on('newMessage', data => {
-    socket.broadcast.emit('message', data);
-  });
+const io = socketIo.listen(server);
 
-  socket.on('newPixelData', data => {
-    socket.broadcast.emit('paintPixel', data);
-  });
-
-  socket.on('eraseCanvasSign', () => {
-    socket.broadcast.emit('eraseCanvas');
-  });
-});
+io.on('connection', socket => socketController(socket));
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -1,22 +1,14 @@
 <template>
   <div class="chat">
-    <section class="message-list">
+    <section class="message-list" v-for="(data, index) in messages" :key="index">
       <section class="message -left test-left">
-        <ul
-          class="nes-balloon from-left from-column"
-          v-for="(data, index) in othersMsg"
-          :key="index"
-        >
-          <li class="msg-style">{{ `others: ${data.msg}` }}</li>
+        <ul class="nes-balloon from-left from-column">
+          <li class="msg-style" v-if="data.id === 2">{{ `others: ${data.msg}` }}</li>
         </ul>
       </section>
       <section class="message -right test-right">
-        <ul
-          class="nes-balloon from-right test-right from-column"
-          v-for="(data, index) in ownMsg"
-          :key="index"
-        >
-          <li class="msg-style">{{ data.msg }}</li>
+        <ul class="nes-balloon from-right test-right from-column">
+          <li class="msg-style" v-if="data.id === 1">{{ data.msg }}</li>
         </ul>
       </section>
     </section>
@@ -35,31 +27,32 @@
 
 <script>
 import io from 'socket.io-client';
-const URI = 'https://thawing-chamber-58948.herokuapp.com/';
+// const URI = 'https://thawing-chamber-58948.herokuapp.com/';
+const local = 'http://localhost:3000/';
 
 export default {
   data() {
     return {
-      socket: io(URI),
+      socket: io(local),
       messages: [],
       message: ''
     };
   },
 
-  computed: {
-    ownMsg() {
-      const result = this.messages.filter(el => {
-        return el.id === 1;
-      });
-      return result;
-    },
-    othersMsg() {
-      const result = this.messages.filter(el => {
-        return el.id === 2;
-      });
-      return result;
-    }
-  },
+  // computed: {
+  //   ownMsg() {
+  //     const result = this.messages.filter(el => {
+  //       return el.id === 1;
+  //     });
+  //     return result;
+  //   },
+  //   othersMsg() {
+  //     const result = this.messages.filter(el => {
+  //       return el.id === 2;
+  //     });
+  //     return result;
+  //   }
+  // },
 
   methods: {
     /* Methods for Message function */
