@@ -1,6 +1,6 @@
 {
-  "name": "server",
-  "version": "0.0.0",
+  "name": "deploy",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "postinstall": "cd client && npm run build",
