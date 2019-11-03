@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "prebuild": "rm -rf ./server/public",
-    "build": "cd client && npm run build",
-    "start": "cd server && npm start"
+    "postinstall": "cd client && npm install",
+    "build": "npm run build",
+    "start": "cd ../server && npm start"
   }
 }
