@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "rm -rf ./server/public",
-    "postinstall": "cd client && npm install",
-    "build": "npm run build",
+    "heroku-preinstall": "cd client && npm install",
+    "heroku-postbuild": "npm run build",
     "start": "cd ../server && npm start"
   }
 }
