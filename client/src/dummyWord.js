@@ -1,5 +1,6 @@
 export default {
   wordList: [
+    'TMI',
     '최최차차',
     '얼죽코',
     '얼죽아',
@@ -12,7 +13,6 @@ export default {
     '핑프',
     '괄도네넴띤',
     '문찐',
-    'TMI',
     '인싸',
     'JMTGR',
     '이생망',

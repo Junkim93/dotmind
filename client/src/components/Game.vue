@@ -53,7 +53,7 @@ export default {
   computed: {
     word() {
       const num = Math.floor(Math.random() * this.wordList.length);
-      return String(this.wordList[num]);
+      return this.wordList[num];
     }
   }
 };
