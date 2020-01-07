@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --exec babel-node ./bin/www --delay 2",
-    "start": "node ./bin/www"
+    "dev": "nodemon --exec babel-node ./bin/www --delay 2"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

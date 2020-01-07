@@ -1,18 +1,11 @@
 <template>
   <div id="app">
     <Header />
-    <Home class="test" />
   </div>
 </template>
 
 <script>
-import Home from '@/views/Home.vue';
-
-export default {
-  components: {
-    Home
-  }
-};
+export default {};
 </script>
 
 <style lang="scss">
