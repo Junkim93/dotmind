@@ -22,7 +22,7 @@
 
 <script>
 import dummy from '../dummyWord';
-import game from '../business/Game';
+import game from './Game.js';
 
 export default {
   data() {
@@ -61,5 +61,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
