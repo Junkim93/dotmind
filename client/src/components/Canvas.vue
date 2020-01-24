@@ -1,8 +1,22 @@
 <template>
   <div class="canvas">
-    <div v-for="(column, columnKey) in pixelData" :key="columnKey">
-      <span v-for="(row, rowKey) in column" :key="rowKey">{{ row.text }}</span>
+    <div
+      class="canvas__wrapper"
+      v-for="(column, columnKey) in pixelData"
+      :key="`column${columnKey}`"
+    >
+      <span
+        class="canvas__wrapper-pixel"
+        v-for="(row, rowKey) in column"
+        :key="`row${rowKey}`"
+        :id="row.id"
+        :style="{ backgroundColor: row.bgColor }"
+        @mousedown.prevent="startDrawing"
+        @mousemove.prevent="keepDrawing"
+        @mouseup.prevent="endDrawing"
+      ></span>
     </div>
+    <Pallete @update-color="changeColor"></Pallete>
     <!-- <table
       class="pixel-canvas"
       ref="pixel"
@@ -24,14 +38,15 @@
 // import io from 'socket.io-client';
 // const URI = 'https://thawing-chamber-58948.herokuapp.com/';
 // const local = 'http://localhost:3000/';
+import Pallete from '@/components/Pallete';
 
 export default {
-  // components: { Swatches },
+  components: { Pallete },
   data() {
     return {
       framePixel: 16,
       pixelData: [],
-      drawing: false,
+      isDrawing: false,
       currentColor: 'black'
       // socket: io(local)
     };
@@ -64,27 +79,41 @@ export default {
       });
     },
     setPixelData() {
-      this.pixelData = this.pixelData.map(height => {
-        return height.reduce((acc, width, i) => {
-          acc.push({ id: i, color: 'red' + i, text: '❌' });
+      this.pixelData = this.pixelData.map((column, columnIndex) => {
+        return column.reduce((acc, row, rowIndex) => {
+          acc.push({ id: `${columnIndex}+${rowIndex}`, bgColor: '' });
           return acc;
         }, []);
       });
-      // this.pixels.flatMap(el => {
-      // })
-      // this.pixels = this.pixels.reduce((acc, curr, i) => {
-      //   acc[i];
-      // }, []);
-      // for (let i = 0; i < this.pixelHeight; i += 1) {
-      //   const gridRow = document.createElement('tr');
-      //   this.$refs.pixel.appendChild(gridRow);
-      //   for (let j = 0; j < this.framePixel; j += 1) {
-      //     const gridCell = document.createElement('td');
-      //     gridCell.key = String(i) + String(j);
-      //     gridRow.appendChild(gridCell);
-      //   }
-      // }
+    },
+
+    paintPixel(v) {
+      const targetPixel = v.toElement.id.split('+');
+      const columnKey = targetPixel[0];
+      const rowKey = targetPixel[1];
+
+      this.pixelData[columnKey][rowKey].bgColor = this.currentColor;
+    },
+
+    startDrawing(v) {
+      this.isDrawing = true;
+      this.paintPixel(v);
+    },
+
+    keepDrawing(v) {
+      if (this.isDrawing) {
+        this.paintPixel(v);
+      }
+    },
+
+    endDrawing() {
+      this.isDrawing = false;
+    },
+
+    changeColor(v) {
+      this.currentColor = v;
     }
+
     // isDrawing(e) {
     //   this.drawing = true;
     //   this.paintPixelSocket(e);
@@ -110,11 +139,22 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .canvas {
-}
+  &__wrapper {
+    width: 100%;
+    height: 33px;
 
-.pixel-canvas {
-  background-color: white;
+    &-pixel {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(105, 105, 105, 0.333);
+
+      &:hover {
+        background-color: rgb(61, 240, 85);
+      }
+    }
+  }
 }
 </style>
