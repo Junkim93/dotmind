@@ -20,8 +20,40 @@ describe('Canvas의', () => {
     });
     describe('setPixelData는', () => {
       it('pixelData 배열의 각 원소에 id, color, text 값을 추가한다.', () => {
-        const expected = { color: 'red0', id: 0, text: '❌' };
+        const expected = { bgColor: '', id: '0+0' };
         expect(wrapper.vm.pixelData[0][0]).toStrictEqual(expected);
+      });
+    });
+  });
+  describe('그림 그리기 이벤트 중', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = shallowMount(Canvas);
+    });
+
+    describe('startDrawing은', () => {
+      it('mousedown 이벤트가 일어났을 때, isDrawing의 값을 true로 바꿔주고, 해당 pixelData의 bgColor를 currentColor로 바꿔준다.', async () => {
+        wrapper.find('.canvas__wrapper-pixel').trigger('mousedown.prevent', {
+          toElement: {
+            id: '0+0'
+          }
+        });
+        await wrapper.vm.$nextTick();
+
+        const targetPixel = wrapper.vm.pixelData[0][0].bgColor;
+        const expectedColor = wrapper.vm.currentColor;
+
+        expect(wrapper.vm.isDrawing).toBe(true);
+        expect(targetPixel).toBe(expectedColor);
+      });
+    });
+    describe('endDrawing은', () => {
+      it('mouseup 이벤트가 일어났을 때, isDrawing의 값을 false로 바꿔준다', async () => {
+        wrapper.vm.isDrawing = true;
+        wrapper.find('.canvas__wrapper-pixel').trigger('mouseup.prevent');
+
+        await wrapper.vm.$nextTick();
+        expect(wrapper.vm.isDrawing).toBe(false);
       });
     });
   });
