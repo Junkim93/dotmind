@@ -1,9 +1,15 @@
 <template>
   <div class="chat">
-    <section class="message-list" v-for="(data, index) in messages" :key="index">
+    <section
+      class="message-list"
+      v-for="(data, index) in messages"
+      :key="index"
+    >
       <section class="message -left test-left">
         <ul class="nes-balloon from-left from-column">
-          <li class="msg-style" v-if="data.id === 2">{{ `others: ${data.msg}` }}</li>
+          <li class="msg-style" v-if="data.id === 2">
+            {{ `others: ${data.msg}` }}
+          </li>
         </ul>
       </section>
       <section class="message -right test-right">
@@ -35,7 +41,7 @@ export default {
     return {
       socket: io(local),
       messages: [],
-      message: ''
+      message: '',
     };
   },
 
@@ -66,7 +72,7 @@ export default {
     moveScrolltoEnd() {
       const messageWrapper = this.$el.querySelector('.message-list');
       messageWrapper.scrollTop = messageWrapper.scrollHeight;
-    }
+    },
   },
 
   mounted() {
@@ -77,7 +83,7 @@ export default {
 
   updated() {
     this.moveScrolltoEnd();
-  }
+  },
 };
 </script>
 

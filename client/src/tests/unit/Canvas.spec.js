@@ -25,6 +25,7 @@ describe('Canvas의', () => {
       });
     });
   });
+
   describe('그림 그리기 이벤트 중', () => {
     let wrapper;
     beforeEach(() => {
@@ -32,18 +33,20 @@ describe('Canvas의', () => {
     });
 
     describe('startDrawing은', () => {
-      it('mousedown 이벤트가 일어났을 때, isDrawing의 값을 true로 바꿔주고, 해당 pixelData의 bgColor를 currentColor로 바꿔준다.', async () => {
+      beforeEach(async () => {
         wrapper.find('.canvas__wrapper-pixel').trigger('mousedown.prevent', {
           toElement: {
-            id: '0+0'
-          }
+            id: '0+0',
+          },
         });
         await wrapper.vm.$nextTick();
-
+      });
+      it('isDrawing의 값을 true로 바꿔준다', () => {
+        expect(wrapper.vm.isDrawing).toBe(true);
+      });
+      it('mousedown 이벤트가 일어났을 때, isDrawing의 값을 true로 바꿔주고, 해당 pixelData의 bgColor를 currentColor로 바꿔준다.', () => {
         const targetPixel = wrapper.vm.pixelData[0][0].bgColor;
         const expectedColor = wrapper.vm.currentColor;
-
-        expect(wrapper.vm.isDrawing).toBe(true);
         expect(targetPixel).toBe(expectedColor);
       });
     });

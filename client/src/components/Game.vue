@@ -1,10 +1,14 @@
 <template>
   <div class="Game">
     <div v-if="start">
-      <button type="button" class="nes-btn is-primary" @click="computedStart">게임 시작</button>
+      <button type="button" class="nes-btn is-primary" @click="computedStart">
+        게임 시작
+      </button>
     </div>
     <div v-else>
-      <button type="button" class="nes-btn is-error" @click="isStart">{{ randomWord }}</button>
+      <button type="button" class="nes-btn is-error" @click="isStart">
+        {{ randomWord }}
+      </button>
     </div>
 
     <div class="nes-field message-input">
@@ -29,7 +33,7 @@ export default {
     return {
       start: true,
       wordList: dummy.wordList,
-      answer: ''
+      answer: '',
     };
   },
 
@@ -50,14 +54,14 @@ export default {
     },
     init() {
       this.answer = '';
-    }
+    },
   },
   computed: {
     randomWord() {
       const num = game.getRandomNum(this.wordList);
       return this.wordList[num];
-    }
-  }
+    },
+  },
 };
 </script>
 

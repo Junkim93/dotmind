@@ -47,7 +47,7 @@ export default {
       framePixel: 16,
       pixelData: [],
       isDrawing: false,
-      currentColor: 'black'
+      currentColor: 'black',
       // socket: io(local)
     };
   },
@@ -112,7 +112,7 @@ export default {
 
     changeColor(v) {
       this.currentColor = v;
-    }
+    },
 
     // isDrawing(e) {
     //   this.drawing = true;
@@ -135,7 +135,7 @@ export default {
     //   this.eraseCanvas();
     //   this.socket.emit('eraseCanvasSign');
     // }
-  }
+  },
 };
 </script>
 

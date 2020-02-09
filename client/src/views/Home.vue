@@ -19,10 +19,10 @@ import Canvas from '@/components/Canvas.vue';
 export default {
   components: {
     Nav,
-    Canvas
+    Canvas,
     // Chat,
     // Game
-  }
+  },
 };
 </script>
 

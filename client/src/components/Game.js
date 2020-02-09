@@ -14,7 +14,7 @@ const game = {
 
   isEqual(a, b) {
     return a === b ? true : false;
-  }
+  },
 };
 
 export default game;

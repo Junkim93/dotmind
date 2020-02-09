@@ -1,7 +1,11 @@
 <template>
   <div class="wrapper">
     <div class="wrapper" v-for="(item, index) in color" :key="index">
-      <button class="test" :style="{ backgroundColor: item }" @click.prevent="emitColorInfo(item)"></button>
+      <button
+        class="test"
+        :style="{ backgroundColor: item }"
+        @click.prevent="emitColor(item)"
+      />
     </div>
   </div>
 </template>
@@ -11,16 +15,16 @@ export default {
   data() {
     return {
       color: ['red', 'black', 'yellow'],
-      currentColor: ''
+      currentColor: '',
     };
   },
 
   methods: {
-    emitColorInfo(item) {
+    emitColor(item) {
       this.currentColor = item;
       this.$emit('update-color', this.currentColor);
-    }
-  }
+    },
+  },
 };
 </script>
 
