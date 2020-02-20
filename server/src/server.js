@@ -4,7 +4,6 @@ const socketServer = require('socket.io')
 const config = require('./config.js')
 const painting = require('./services/wsPainting.js')
 const chat = require('./services/wsChat.js')
-// import game from './services/wsGame.js'
 
 const http = server.createServer(app)
 const io = socketServer(http)
