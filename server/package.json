@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --exec babel-node ./bin/www --delay 2",
-    "start": "node ./bin/www"
+    "dev": "nodemon --exec babel-node ./src/server.js --delay 2",
+    "start": "node ./src/server.js"
   },
   "dependencies": {
+    "connect-history-api-fallback": "^1.6.0",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.3.2",
     "cors": "^2.8.5",
