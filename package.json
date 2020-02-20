@@ -5,8 +5,7 @@
   "scripts": {
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run serve",
-    "heroku-preinstall": "cd server && npm install",
-    "heroku-postbuild": "cd client && npm install && npm run build",
+    "client:build": "cd client && npm run build",
     "start": "cd server && npm start"
   }
 }
