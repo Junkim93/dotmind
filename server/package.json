@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/server.js --delay 2",
+    "dev": "nodemon --exec babel-node ./src/server.mjs --delay 2",
     "start": "node ./src/server.mjs"
   },
   "dependencies": {
