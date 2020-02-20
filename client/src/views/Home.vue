@@ -1,41 +1,31 @@
 <template>
-  <div class="home-container">
-    <header>
-      <Nav />
-    </header>
-    <div class="contents-container">
-      <Canvas class="canvas-container" />
-    </div>
+  <div class="bg">
+    <h1>도트 마인드</h1>
+    <router-link :to="{ name: 'game' }">
+      <button type="button" class="nes-btn is-primary">혼자 그림 그리기</button>
+    </router-link>
+    <router-link :to="{ name: 'multiGame' }">
+      <button type="button" class="nes-btn is-success">같이 그림 그리기</button>
+    </router-link>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Nav from '@/components/Nav.vue';
-import Canvas from '@/components/Canvas.vue';
-// import Chat from '@/components/Chat.vue';
-// import Game from '@/components/Game.vue';
-
-export default {
-  components: {
-    Nav,
-    Canvas,
-    // Chat,
-    // Game
-  },
-};
+export default {};
 </script>
 
-<style scoped>
-.home-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+<style lang="scss" scoped>
+.bg {
+  text-align: center;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-.contents-container {
-  display: flex;
-  justify-content: space-around;
-  flex: 1;
+  > h1 {
+    color: white;
+    font-size: 50px;
+    padding-bottom: 20px;
+  }
 }
 </style>
