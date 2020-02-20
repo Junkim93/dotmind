@@ -1,9 +1,9 @@
-import app from './app.js'
-import server from 'http'
-import socketServer from 'socket.io'
-import config from './config.js'
-import painting from './services/wsPainting.js'
-import chat from './services/wsChat.js'
+const app = require('./app.js')
+const server = require('http')
+const socketServer = require('socket.io')
+const config = require('./config.js')
+const painting = require('./services/wsPainting.js')
+const chat = require('./services/wsChat.js')
 // import game from './services/wsGame.js'
 
 const http = server.createServer(app)

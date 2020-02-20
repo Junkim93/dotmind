@@ -1,9 +1,9 @@
-import express from 'express'
-import path from 'path'
-import cookieParser from 'cookie-parser'
-import logger from 'morgan'
-import cors from 'cors'
-import history from 'connect-history-api-fallback'
+const express = require('express')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const cors = require('cors')
+const history = require('connect-history-api-fallback')
 
 const app = express()
 

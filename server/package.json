@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/server.mjs --delay 2",
-    "start": "node ./src/server.mjs"
+    "dev": "nodemon --exec babel-node ./src/server.js --delay 2",
+    "start": "node ./src/server.js"
   },
   "dependencies": {
     "connect-history-api-fallback": "^1.6.0",
