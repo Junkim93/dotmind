@@ -4,4 +4,4 @@ const chat = socket => {
   })
 }
 
-export default chat
+module.exports = chat
