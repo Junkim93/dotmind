@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "heroku-preinstall": "cd client && npm install && cd ../server && npm install",
-    "heroku-postbuild": "cd client && npm run build",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run serve",
+    "heroku-preinstall": "cd client && npm install",
+    "heroku-postbuild": "cd client && npm run build",
     "start": "cd server && npm start"
   }
 }
