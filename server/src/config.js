@@ -3,4 +3,4 @@ const options = () => {
     PORT: 4000,
   }
 }
-export default options
+module.exports = options

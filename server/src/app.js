@@ -19,4 +19,4 @@ app.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public', 'index.html'))
 })
 
-export default app
+module.exports = app

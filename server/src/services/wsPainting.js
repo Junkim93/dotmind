@@ -4,4 +4,4 @@ const painting = socket => {
   })
 }
 
-export default painting
+module.exports = painting
