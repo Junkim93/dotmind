@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/server.js --delay 2",
-    "start": "node --experimental-modules ./src/server.js"
+    "start": "node ./src/server.mjs"
   },
   "dependencies": {
     "connect-history-api-fallback": "^1.6.0",
