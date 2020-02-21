@@ -1,9 +1,6 @@
 <template>
   <div class="canvas">
-    <div
-      ref="canvasImage"
-      class="canvas__wrapper"
-    >
+    <div ref="canvasImage" class="canvas__wrapper">
       <div
         v-for="(column, columnKey) in pixelData"
         :key="`column${columnKey}`"
@@ -23,29 +20,20 @@
     </div>
     <Pallete @update-color="changeColor" />
     <div class="canvas__utils">
-      <button
-        class="nes-btn is-error canvas__utils__clear"
-        @click="clearPaint"
-      >
-        모두 지우기
-      </button>
-      <button
-        class="nes-btn canvas__utils__download"
-        @click="downloadImg"
-      >
-        그림 다운로드
-      </button>
+      <button class="nes-btn is-error canvas__utils__clear" @click="clearPaint">모두 지우기</button>
+      <button class="nes-btn canvas__utils__download" @click="downloadImg">그림 다운로드</button>
     </div>
   </div>
 </template>
 
 <script>
-import io from 'socket.io-client';
-import domtoimage from 'dom-to-image';
-import download from 'downloadjs';
-import Pallete from './Pallete';
+import io from "socket.io-client";
+import domtoimage from "dom-to-image";
+import download from "downloadjs";
+import Pallete from "./Pallete";
 
-const socket = io('http://localhost:4000/multi-game');
+const PORT = process.env.PORT || 4000;
+const socket = io(`http://localhost:${PORT}/multi-game`);
 
 export default {
   components: { Pallete },
@@ -53,8 +41,8 @@ export default {
   props: {
     multiMode: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
 
   data() {
@@ -62,7 +50,7 @@ export default {
       framePixel: 16,
       pixelData: [],
       isDrawing: false,
-      currentColor: 'black',
+      currentColor: "black"
     };
   },
 
@@ -86,14 +74,14 @@ export default {
     setPixelData() {
       this.pixelData = this.pixelData.map((column, columnIndex) => {
         return column.reduce((acc, row, rowIndex) => {
-          acc.push({ id: `${columnIndex}+${rowIndex}`, bgColor: '' });
+          acc.push({ id: `${columnIndex}+${rowIndex}`, bgColor: "" });
           return acc;
         }, []);
       });
     },
 
     paintPixel(v) {
-      const targetPixel = v.toElement.id.split('+');
+      const targetPixel = v.toElement.id.split("+");
       const columnKey = targetPixel[0];
       const rowKey = targetPixel[1];
 
@@ -103,17 +91,17 @@ export default {
         this.sendPaint({
           columnKey: columnKey,
           rowKey: rowKey,
-          color: this.currentColor,
+          color: this.currentColor
         });
       }
     },
 
     sendPaint(targetInfo) {
-      socket.emit('paintInfo', targetInfo);
+      socket.emit("paintInfo", targetInfo);
     },
 
     receivePaint() {
-      socket.on('receivePaintInfo', target => {
+      socket.on("receivePaintInfo", target => {
         this.pixelData[target.columnKey][target.rowKey].bgColor = target.color;
       });
     },
@@ -140,17 +128,17 @@ export default {
     async downloadImg() {
       const node = this.$refs.canvasImage;
       const blob = await domtoimage.toBlob(node);
-      download(blob, 'undefined.png', 'image/png');
+      download(blob, "undefined.png", "image/png");
     },
 
     clearPaint() {
       for (let i = 0; i < this.pixelData.length; i += 1) {
         for (let j = 0; j < this.pixelData.length; j += 1) {
-          this.pixelData[i][j].bgColor = '';
+          this.pixelData[i][j].bgColor = "";
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,51 +1,31 @@
 <template>
   <div class="chat nes-container is-rounded">
-    <div
-      ref="messageContainer"
-      class="chat__message"
-    >
-      <ul
-        v-for="(data, index) in messages"
-        :key="index"
-        class="chat__message__list"
-      >
+    <div ref="messageContainer" class="chat__message">
+      <ul v-for="(data, index) in messages" :key="index" class="chat__message__list">
         <li
           v-if="isOtherUser(data.id)"
           class="chat__message__list__content"
           :class="{ otherUser: isOtherUser(data.id) }"
-        >
-          anonymous: {{ data.msg }}
-        </li>
-        <li
-          v-else
-          class="chat__message__list__content"
-        >
-          {{ data.msg }}
-        </li>
+        >anonymous: {{ data.msg }}</li>
+        <li v-else class="chat__message__list__content">{{ data.msg }}</li>
       </ul>
     </div>
     <div class="nes-field chat__input">
-      <input
-        ref="chatInput"
-        v-model="message"
-        type="text"
-        class="nes-input"
-        @keypress="sendMsg"
-      >
+      <input ref="chatInput" v-model="message" type="text" class="nes-input" @keypress="sendMsg" />
     </div>
   </div>
 </template>
 
 <script>
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:4000/multi-game');
+import io from "socket.io-client";
+const PORT = process.env.PORT || 4000;
+const socket = io(`http://localhost:${PORT}/multi-game`);
 
 export default {
   data() {
     return {
-      message: '',
-      messages: [],
+      message: "",
+      messages: []
     };
   },
 
@@ -59,22 +39,22 @@ export default {
 
   methods: {
     sendMsg(e) {
-      if (e.code == 'Enter') {
+      if (e.code == "Enter") {
         this.messages.push({ msg: this.message, id: 0 });
-        socket.emit('message', { msg: this.message, id: 1 });
+        socket.emit("message", { msg: this.message, id: 1 });
         this.initMsg();
       }
     },
 
     receiveMsg() {
-      socket.on('newMessage', msg => {
+      socket.on("newMessage", msg => {
         this.messages.push(msg);
       });
     },
 
     initMsg() {
-      this.$refs.chatInput.value = '';
-      this.message = '';
+      this.$refs.chatInput.value = "";
+      this.message = "";
     },
 
     isOtherUser(id) {
@@ -90,8 +70,8 @@ export default {
       if (!shouldScroll) {
         this.$refs.messageContainer.scrollTop = this.$refs.messageContainer.scrollHeight;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
