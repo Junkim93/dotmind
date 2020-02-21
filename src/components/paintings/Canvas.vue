@@ -32,7 +32,7 @@ import domtoimage from "dom-to-image";
 import download from "downloadjs";
 import Pallete from "./Pallete";
 
-const URI = process.env.PORT
+const URI = PRODUCTION
   ? "https://dot-mind.herokuapp.com/multi-game"
   : "http://localhost:4000/multi-game";
 const socket = io(URI);

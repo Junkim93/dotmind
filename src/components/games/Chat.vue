@@ -18,7 +18,7 @@
 
 <script>
 import io from "socket.io-client";
-const URI = process.env.PORT
+const URI = PRODUCTION
   ? "https://dot-mind.herokuapp.com/multi-game"
   : "http://localhost:4000/multi-game";
 const socket = io(URI);
