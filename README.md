@@ -4,6 +4,8 @@
 
 도트를 좋아해서 언젠가 만들어보고 싶었다. (친구들과 즐기기용)
 
+https://dot-mind.herokuapp.com/
+
 ## Key Concept
 
 **도트버전** 캐치마인드
