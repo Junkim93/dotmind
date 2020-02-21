@@ -1,6 +1,10 @@
 <template>
   <div class="pallete">
-    <div class="pallete-wrapper" v-for="(item, index) in color" :key="index">
+    <div
+      v-for="(item, index) in color"
+      :key="index"
+      class="pallete-wrapper"
+    >
       <button
         class="nes-btn pallete-wrapper__paint"
         :style="{ backgroundColor: item }"

@@ -1,10 +1,13 @@
 <template>
   <div class="chat nes-container is-rounded">
-    <div class="chat__message" ref="messageContainer">
+    <div
+      ref="messageContainer"
+      class="chat__message"
+    >
       <ul
-        class="chat__message__list"
         v-for="(data, index) in messages"
         :key="index"
+        class="chat__message__list"
       >
         <li
           v-if="isOtherUser(data.id)"
@@ -13,17 +16,22 @@
         >
           anonymous: {{ data.msg }}
         </li>
-        <li v-else class="chat__message__list__content">{{ data.msg }}</li>
+        <li
+          v-else
+          class="chat__message__list__content"
+        >
+          {{ data.msg }}
+        </li>
       </ul>
     </div>
     <div class="nes-field chat__input">
       <input
-        type="text"
-        class="nes-input"
         ref="chatInput"
         v-model="message"
+        type="text"
+        class="nes-input"
         @keypress="sendMsg"
-      />
+      >
     </div>
   </div>
 </template>

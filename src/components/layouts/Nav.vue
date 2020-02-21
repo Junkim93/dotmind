@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">도트 마인드</router-link>
+    <router-link to="/">
+      도트 마인드
+    </router-link>
   </nav>
 </template>
 

@@ -4,7 +4,10 @@
       <Nav />
     </header>
     <div class="contents-container">
-      <Canvas class="canvas-container" :multiMode="multiMode" />
+      <Canvas
+        class="canvas-container"
+        :multi-mode="multiMode"
+      />
       <Chat />
     </div>
   </div>

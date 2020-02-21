@@ -1,29 +1,38 @@
 <template>
   <div class="canvas">
-    <div class="canvas__wrapper" ref="canvasImage">
+    <div
+      ref="canvasImage"
+      class="canvas__wrapper"
+    >
       <div
-        class="canvas__wrapper__column"
         v-for="(column, columnKey) in pixelData"
         :key="`column${columnKey}`"
+        class="canvas__wrapper__column"
       >
         <span
-          class="canvas__wrapper__row"
           v-for="(row, rowKey) in column"
-          :key="`row${rowKey}`"
           :id="row.id"
+          :key="`row${rowKey}`"
+          class="canvas__wrapper__row"
           :style="{ backgroundColor: row.bgColor }"
           @mousedown.prevent="startDrawing"
           @mousemove.prevent="keepDrawing"
           @mouseup.prevent="endDrawing"
-        ></span>
+        />
       </div>
     </div>
     <Pallete @update-color="changeColor" />
     <div class="canvas__utils">
-      <button class="nes-btn is-error canvas__utils__clear" @click="clearPaint">
+      <button
+        class="nes-btn is-error canvas__utils__clear"
+        @click="clearPaint"
+      >
         모두 지우기
       </button>
-      <button class="nes-btn canvas__utils__download" @click="downloadImg">
+      <button
+        class="nes-btn canvas__utils__download"
+        @click="downloadImg"
+      >
         그림 다운로드
       </button>
     </div>

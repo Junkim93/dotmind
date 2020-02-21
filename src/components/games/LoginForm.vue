@@ -2,7 +2,11 @@
   <div>
     <div class="nes-field">
       <label for="name_field">Your name</label>
-      <input type="text" id="name_field" class="nes-input" />
+      <input
+        id="name_field"
+        type="text"
+        class="nes-input"
+      >
     </div>
   </div>
 </template>
