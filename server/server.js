@@ -19,4 +19,4 @@ io.of('/multi-game').on('connection', socket => {
   chat(socket)
 })
 
-http.listen(options.PORT, () => handleListener())
+http.listen(process.env.PORT || options.PORT, () => handleListener())
