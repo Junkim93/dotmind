@@ -18,9 +18,12 @@
 
 <script>
 import io from "socket.io-client";
-const URI = PRODUCTION
-  ? "https://dot-mind.herokuapp.com/multi-game"
-  : "http://localhost:4000/multi-game";
+
+const URI =
+  window.location.hostname === "localhost"
+    ? "http://localhost:4000/multi-game"
+    : "https://dot-mind.herokuapp.com/multi-game";
+
 const socket = io(URI);
 
 export default {
