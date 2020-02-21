@@ -18,8 +18,10 @@
 
 <script>
 import io from "socket.io-client";
-const PORT = process.env.PORT || 4000;
-const socket = io(`http://localhost:${PORT}/multi-game`);
+const URI = process.env.PORT
+  ? "https://dot-mind.herokuapp.com/multi-game"
+  : "http://localhost:4000/multi-game";
+const socket = io(URI);
 
 export default {
   data() {
